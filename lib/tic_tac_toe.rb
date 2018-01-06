@@ -27,8 +27,8 @@ class TicTacToe
     @index = index.to_i - 1
   end
 
-  def move (index, token = "X")
-    @board[@index] = token
+  def move (index, token)
+    @board[@index] = @token
   end
 
   def position_taken?
@@ -60,7 +60,7 @@ class TicTacToe
   end
 
   def current_player
-    turn_count % 2 == 0 ? "X" : "O"
+    turn_count % 2 == 0 ? @token = "X" : @token = "O"
   end
 
   def won?
