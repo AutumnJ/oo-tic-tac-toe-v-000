@@ -67,10 +67,34 @@ class TicTacToe
     WIN_COMBINATIONS.each do |win_array|
       if @board[win_array[0]] == "X" && @board[win_array[1]] == "X" && @board[win_array[2]] == "X" ||
         @board[win_array[0]] == "O" && @board[win_array[1]] == "O" && @board[win_array[2]] == "O"
-      return win_array
+      @winning_array = win_array
       end
     end
     false
+  end
+
+  def full?
+    @board.all? {|index| index == "X" || index == "O" }
+  end
+
+  def draw?
+    if full? == true && won? == false
+      return true
+    else
+      return false
+    end
+  end
+
+  def over?
+    won? || draw? || full?
+  end
+
+  def winner
+    if won?
+      @winner = @board[@winning_array[0]]
+    else
+      nil
+    end
   end
 
 end
