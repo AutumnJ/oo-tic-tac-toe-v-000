@@ -35,24 +35,42 @@ class TicTacToe
     return !(@board[@index] == " " || @board[@index] == "" || @board[@index] == nil)
   end
 
-  def valid_move?(board, index)
-    if position_taken? == true || index < 0 || index > 8
+  def valid_move?
+    if position_taken? == true || @index < 0 || @index > 8
       return false
     else
       return true
     end
   end
 
-  def turn(board)
-  puts "Please enter 1-9:"
-  input = gets.strip
-  index = input_to_index(input)
-  if valid_move?(board, index)
-    move(board, index, current_player(board))
-    display_board(board)
-  else
-    turn(board)
+  def turn
+    puts "Please enter 1-9:"
+    #input = gets.strip
+    #index = input_to_index(input)
+    if valid_move?
+      move
+      display_board
+    else
+      turn
+    end
   end
-end
+
+  def turn_count
+    @board.count{|token| token == "X" || token == "O"}
+  end
+
+  def current_player
+    turn_count % 2 == 0 ? "X" : "O"
+  end
+
+  def won?
+    WIN_COMBINATIONS.each do |win_array|
+      if @board[win_array[0]] == "X" && @board[win_array[1]] == "X" && @board[win_array[2]] == "X" ||
+        @board[win_array[0]] == "O" && @board[win_array[1]] == "O" && @board[win_array[2]] == "O"
+      return win_array
+      end
+    end
+    false
+  end
 
 end
