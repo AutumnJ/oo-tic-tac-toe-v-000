@@ -23,8 +23,8 @@ class TicTacToe
     puts " #{@board[6]} | #{@board[7]} | #{@board[8]} "
   end
 
-  def input_to_index
-    @index = gets.strip.to_i - 1
+  def input_to_index=(index)
+    @index = index.gets.strip.to_i - 1
   end
 
   def move=(index, token = "X")
